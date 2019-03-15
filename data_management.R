@@ -39,6 +39,7 @@ Sys.Date()
 date()
 order(leadership$age)
 leadership[order(-leadership$age),]
+leadership[order(leadership$age),"age"]
 ?order()
 leadership[2,1:11]
 a<-c(1,2,3)
