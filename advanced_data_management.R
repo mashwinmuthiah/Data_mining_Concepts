@@ -66,3 +66,54 @@ firstname<-sapply(name, "[",1)
 lastname<-sapply(name,"[",2)
 roster<-cbind(firstname,lastname,roster[,-1])
 roster[order(lastname,firstname),]
+for (i in 1:10) print("Hello")
+i <-10
+while (i>0) {print("hello");i<-i-1}
+mystats<-function(x,parametric=TRUE,print = FALSE){
+  if(parametric){
+    center<-mean(x);spread<-sd(x)
+  }else{center<-median(x);spread<-mad(x)
+  }
+  if(print&parametric){
+    cat("Mean=", center, "\n", "SD=", spread, "\n")
+  } else if (print & !parametric) {
+    cat("Median=", center, "\n", "MAD=", spread, "\n")
+  }
+  results<-list(center = center,spread = spread)
+  return(results)
+}
+x<-rnorm(500)
+y<-mystats(x)
+y$center
+y <- mystats(x, parametric=FALSE, print=TRUE)
+y
+mydate<-function(type="long") {
+  message("hi")
+switch(type,long = format(Sys.time(),"%A %B %d %Y"),
+       short = format(Sys.time(), "%m-%d-%y"),
+            cat(type,"is not recoganized type\n"))
+}
+mydate("long")
+mydate("oko")
+mydate("short")
+?warning()
+?mtcars
+cars<-mtcars[1:4,1:4]
+mtcars[1:4,1:4]
+t(cars)
+agdata<-aggregate(cars,by=list(cars$mpg,cars$cyl),mean)
+agdata
+install.packages("reshape2")
+mydata <- read.table(header=TRUE, sep=" ", text="
+ID Time X1 X2
+1 1 5 6
+1 2 3 5
+2 1 6 1
+2 2 2 4
+")
+library(reshape2)
+md<-melt(mydata,id=c("ID","Time"))
+md
+dcast(md, ID~variable)
+dcast(md, ID+Time~variable)
+dcast(md, ID+variable~Time)
