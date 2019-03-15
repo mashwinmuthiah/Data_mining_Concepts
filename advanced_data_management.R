@@ -30,3 +30,39 @@ plot(x,y,type = "l")
 x <- c("ab", "cde", "fghij")
 nchar(x)
 length(x)
+x<-"ashwin"
+substr(x,2,4)
+substr(x,2,4)<-'222'
+substr(x,1,1) <- toupper(toupper(substr(x,1,1)))
+mydata<-matrix(rnorm(30),nrow = 6)
+mydata
+round(apply(mydata,1,mean),2)
+sample(1:10,1)
+x<-list(sample(1:100,5))
+set.seed(1234)
+sapply(x,mean)
+mean(x)
+x<-sample(1:100,5)
+mean(x)
+options(digits = 2)
+roster
+z<-scale(roster[,2:4])
+z
+score<-apply(z,1,mean)
+score
+roster<-cbind(roster,score)
+roster
+y<-quantile(roster$score,c(.8,.6,.4,.2))
+y
+roster$grade[roster$score>=y[1]]<-"A"
+roster$grade[roster$score<y[1]&roster$score>=y[2]]<-"B"
+roster$grade[roster$score<y[2]&roster$score>=y[3]]<-"C"
+roster$grade[roster$score<y[3]&roster$score>=y[4]]<-"D"
+roster$grade[roster$score<y[4]]<-"F"
+roster
+name <-strsplit(roster$Student," ")
+name
+firstname<-sapply(name, "[",1)
+lastname<-sapply(name,"[",2)
+roster<-cbind(firstname,lastname,roster[,-1])
+roster[order(lastname,firstname),]
