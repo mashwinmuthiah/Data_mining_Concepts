@@ -68,4 +68,20 @@ boxplot(mpg~cyl,data = mtcars,notch = TRUE,main = "Notched box plot", varwidth =
 mtcars$cyl.f<-factor(mtcars$cyl,levels = c(4,6,8),labels = c("4","6","8"))
 mtcars$am.f<-factor(mtcars$am,levels = c(0,1),labels = c("auto","standard"))
 boxplot(mpg~am.f*cyl.f,data = mtcars,main = "Conbined box plot",col = c("red","blue"),ylim = c(10,35))
-                     
+
+#violin plot
+install.packages("vioplot")                     
+x1<-mtcars$mpg[mtcars$cyl == 4]
+x2<-mtcars$mpg[mtcars$cyl == 6]
+x3<-mtcars$mpg[mtcars$cyl == 8]
+library(vioplot)
+vioplot(x1,x2,x3,col = rainbow(3))
+
+#dot chart
+dotchart(mtcars$mpg, labels=row.names(mtcars),cex = 0.8)
+x<-mtcars[order(mtcars$mpg),]
+x$cyl <-factor(x$cyl)
+x$color[x$cyl==4]<-"red"
+x$color[x$cyl==6]<-"blue"
+x$color[x$cyl==8]<-"green"
+dotchart(x$mpg,label = row.names(x),col = x$color,groups = x$cyl)
