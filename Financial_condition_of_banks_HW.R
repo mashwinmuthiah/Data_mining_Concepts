@@ -1,0 +1,29 @@
+Banks<-read.csv("Banks_csv.csv")
+View(Banks)
+Banks$Financial.Condition <- factor(Banks$Financial.Condition,levels = c(1,0))
+logit.class<-glm(Financial.Condition~TotExp.Assets+TotLns.Lses.Assets,family=binomial(link="logit"),data=Banks)
+summary(logit.class)
+plot(logit.class)
+coef(logit.class)
+exp(coef(logit.class))
+test<-data.frame(TotExp.Assets=0.11,TotLns.Lses.Assets=0.6)
+logit<-predict.glm(logit.class,test)
+odds<-exp(logit)
+odds
+probability<-predict.glm(logit.class,test,type="response")
+probability
+coefficients(logit.class)[3]
+cooef.of.odds <- exp(coefficients(logit.class)[3])
+cooef.of.odds
+p <- ifelse(logit.class$fitted.values >= 0.5,0,1)
+table(p, Banks$Financial.Condition)
+p <- ifelse(logit.class$fitted.values >= 0.9,0,1)
+table(p, Banks$Financial.Condition)
+p <- ifelse(logit.class$fitted.values >= 0.1,0,1)
+table(p, Banks$Financial.Condition)
+p <- ifelse(logit.class$fitted.values >= 0,0,1)
+table(p, Banks$Financial.Condition)
+p <- ifelse(logit.class$fitted.values >= 0.03,0,1)
+table(p, Banks$Financial.Condition)
+
+
