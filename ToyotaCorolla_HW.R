@@ -1,3 +1,4 @@
+#installing and loading packages needed.
 install.packages("caret")
 library(caret)
 install.packages("lattice")
