@@ -25,5 +25,3 @@ p <- ifelse(logit.class$fitted.values >= 0,0,1)
 table(p, Banks$Financial.Condition)
 p <- ifelse(logit.class$fitted.values >= 0.03,0,1)
 table(p, Banks$Financial.Condition)
-
-
