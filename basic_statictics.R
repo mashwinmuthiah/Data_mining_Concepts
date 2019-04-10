@@ -64,3 +64,19 @@ fisher.test(xtabs(~Arthritis$Treatment+Arthritis$Improved))
 mantelhaen.test(xtabs(~Arthritis$Treatment+Arthritis$Improved+Arthritis$Sex))
 
 assocstats(xtabs(~Arthritis$Treatment+Arthritis$Sex))
+
+head(state.x77)
+
+cor(state.x77[,1:6],method = "spearman")
+state.x77[1:2,c("Population","Income")]
+x<-state.x77[,c("Population", "Income", "Illiteracy", "HS Grad")]
+y <- state.x77[,c("Life Exp", "Murder")]
+cor(x,y)
+install.packages("ggm")
+library(ggm)
+pcor(c(1,5,2,3,6),cov(state.x77))
+
+corr.test(state.x77,use = "complete")
+
+install.packages("MASS")
+library(MASS)
