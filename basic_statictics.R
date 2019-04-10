@@ -38,3 +38,27 @@ psych::describe.by(data,list(am=mtcars$am))
 
 library(vcd)
 head(Arthritis)
+
+table(Arthritis$Improved)
+prop.table(table(Arthritis$Improved))*100
+
+table(Arthritis$Improved,Arthritis$Sex)
+
+prop.table(xtabs(~Arthritis$Improved+Arthritis$Sex))*100       
+
+margin.table(table(Arthritis$Treatment),2)
+             
+addmargins(prop.table(xtabs(~Arthritis$Improved+Arthritis$Sex))*100,2)
+
+library(gmodels)
+CrossTable(Arthritis$Treatment,Arthritis$Improved)
+
+
+table(Arthritis$Treatment,Arthritis$Sex,Arthritis$Improved)
+ftable(addmargins(xtabs(~Arthritis$Treatment+Arthritis$Sex+Arthritis$Improved)))
+
+ftable(addmargins(prop.table(table(Arthritis$Treatment,Arthritis$Sex,Arthritis$Improved))))
+
+chisq.test(xtabs(~Arthritis$Treatment+Arthritis$Sex))
+fisher.test(xtabs(~Arthritis$Treatment+Arthritis$Improved))
+mantelhaen.test(xtabs(~Arthritis$Treatment+Arthritis$Improved+Arthritis$Sex))
