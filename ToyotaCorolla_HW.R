@@ -1,14 +1,6 @@
 #installing and loading packages needed.
-install.packages("caret")
 library(caret)
-install.packages("lattice")
 library(lattice)
-install.packages("ggplot2")
-install.packages("rpart")
-install.packages("rattle")
-install.packages("tree")
-install.packages("gmodels")
-install.packages("RColorBrewer")
 library(ggplot2)
 library(rpart)
 library(rpart.plot)
@@ -16,8 +8,8 @@ library(rattle)
 library(tree)
 library(gmodels)
 library(RColorBrewer)
-install.packages("fastDummies")
 
+#loading CSV file
 TC<-read.csv("ToyotaCorolla_csv_data.csv")
 View(TC)
 str(TC)
@@ -63,8 +55,8 @@ valid.index<-sample(row.names(remdf),0.3*dim(TC)[1])
 validdf<-TC[valid.index,]
 test.index<-setdiff(row.names(remdf),valid.index)
 testdf<-TC[test.index,]
-
 traindf<-as.data.frame(traindf)
+
 #Running a regression tree:
 #(a)	Age_08_04, HP & KM are the three important car specifications
 RT1<-rpart(Price~Age_08_04+KM+unlist(CNG)+unlist(Petrol)+HP+Automatic+Doors+
