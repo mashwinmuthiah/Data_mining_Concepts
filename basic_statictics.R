@@ -62,3 +62,5 @@ ftable(addmargins(prop.table(table(Arthritis$Treatment,Arthritis$Sex,Arthritis$I
 chisq.test(xtabs(~Arthritis$Treatment+Arthritis$Sex))
 fisher.test(xtabs(~Arthritis$Treatment+Arthritis$Improved))
 mantelhaen.test(xtabs(~Arthritis$Treatment+Arthritis$Improved+Arthritis$Sex))
+
+assocstats(xtabs(~Arthritis$Treatment+Arthritis$Sex))
