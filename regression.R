@@ -92,3 +92,55 @@ spreadLevelPlot(fit3)
 library(gvlma)
 gvmode<- gvlma(fit3)
 summary(gvmode)
+
+#outliers
+library(car)
+outlierTest(fit3)
+
+#High-leverage points
+plot(hatvalues(fit3))
+p <- length(coefficients(fit3))
+n <- length(fitted(fit3))
+identify(1:length(fitted(fit3)),hatvalues(fit3),names(hatvalues(fit3)))
+abline(h =c(2,3)*p/n,col = "red",lty = 2)
+
+#Influential observations
+## Cook's D test
+cutoff<-4/(nrow(states)-length(fit3$coefficients)-2)
+plot(fit3,which = 4)
+abline(h = cutoff)
+
+#av Plot
+avPlots(fit3 , ask = FALSE)
+avPlots(fit3, ask=FALSE, id.method="identify")
+par(mfrow = (c(1,1)))
+influencePlot(fit3,id.method = "identical")
+
+
+#CORRECTIVE MEASURES
+##Transforming
+summary(powerTransform(states$Murder))
+
+boxTidwell(Murder~Population+Illiteracy,data=states)
+
+#comparing models
+anova(myfit,fit2)
+AIC(myfit,fit2)
+
+#Variable selection
+##stepwise regression
+library(MASS)
+fit_vs <- lm(Murder ~ Population + Illiteracy + Income + Frost,
+          data=states)
+stepAIC(fit_vs,direction = "backward")
+
+#all subset regression
+library(leaps)
+leaps <-regsubsets(Murder ~ Population + Illiteracy + Income +
+                     Frost, data=states, nbest=4)
+plot(leaps,scale = "adjr2")
+?regsubsets
+
+library(car)
+subsets(leaps,statistic = "cp")
+abline(1,1)
