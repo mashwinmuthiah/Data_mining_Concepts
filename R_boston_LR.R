@@ -24,3 +24,28 @@ par(mfrow = c(2,2))
 plot(my_fit)
 anova(my_fit)
 
+library(car)
+qqplot(my_fit,simulate = TRUE)
+
+durbinWatsonTest(my_fit)
+
+crPlots(my_fit)
+
+ncvTest(my_fit)
+
+par(mfrow = c(1,1))
+spreadLevelPlot(my_fit)
+
+gvlma::gvlma(my_fit)
+
+vif(my_fit)
+
+outlierTest(my_fit)
+
+plot(hatvalues(my_fit))
+
+influencePlot(my_fit)
+library(leaps)
+library(car)
+library(MASS)
+stepAIC(my_fit,direction = "backward")
